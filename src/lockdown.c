@@ -32,7 +32,9 @@
 #define __USE_GNU 1
 #include <stdio.h>
 #include <ctype.h>
+#ifndef _MSC_VER
 #include <unistd.h>
+#endif
 #ifdef HAVE_OPENSSL
 #include <openssl/pem.h>
 #include <openssl/x509.h>
@@ -654,8 +656,8 @@ LIBIMOBILEDEVICE_API lockdownd_error_t lockdownd_client_new(idevice_t device, lo
 		return LOCKDOWN_E_INVALID_ARG;
 
 	static struct lockdownd_service_descriptor service = {
-		.port = 0xf27e,
-		.ssl_enabled = 0
+		0xf27e,
+		0
 	};
 
 	property_list_service_client_t plistclient = NULL;
@@ -1499,7 +1501,7 @@ LIBIMOBILEDEVICE_API lockdownd_error_t lockdownd_get_sync_data_classes(lockdownd
 
 	while((value = plist_array_get_item(dict, *count)) != NULL) {
 		plist_get_string_val(value, &val);
-		newlist = realloc(*classes, sizeof(char*) * (*count+1));
+		newlist = (char **)realloc(*classes, sizeof(char*) * (*count+1));
 		str_remove_spaces(val);
 		if (asprintf(&newlist[*count], "com.apple.%s", val) < 0) {
 			debug_info("ERROR: asprintf failed");
@@ -1510,7 +1512,7 @@ LIBIMOBILEDEVICE_API lockdownd_error_t lockdownd_get_sync_data_classes(lockdownd
 		*count = *count+1;
 	}
 
-	newlist = realloc(*classes, sizeof(char*) * (*count+1));
+	newlist = (char **)realloc(*classes, sizeof(char*) * (*count+1));
 	newlist[*count] = NULL;
 	*classes = newlist;
 

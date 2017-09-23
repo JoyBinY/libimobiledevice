@@ -23,9 +23,13 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
+#ifndef _MSC_VER
 #include <unistd.h>
-#include <errno.h>
 #include <sys/time.h>
+#else
+#define __func__ __FUNCTION__
+#endif
+#include <errno.h>
 #include <sys/stat.h>
 #ifdef WIN32
 #include <winsock2.h>
@@ -164,7 +168,7 @@ int socket_create(uint16_t port)
 		return -1;
 	}
 
-	if (setsockopt(sfd, SOL_SOCKET, SO_REUSEADDR, (void*)&yes, sizeof(int)) == -1) {
+	if (setsockopt(sfd, SOL_SOCKET, SO_REUSEADDR, (const char *)&yes, sizeof(int)) == -1) {
 		perror("setsockopt()");
 		socket_close(sfd);
 		return -1;
@@ -230,7 +234,7 @@ int socket_connect(const char *addr, uint16_t port)
 		return -1;
 	}
 
-	if (setsockopt(sfd, SOL_SOCKET, SO_REUSEADDR, (void*)&yes, sizeof(int)) == -1) {
+	if (setsockopt(sfd, SOL_SOCKET, SO_REUSEADDR, (const char *)&yes, sizeof(int)) == -1) {
 		perror("setsockopt()");
 		socket_close(sfd);
 		return -1;
@@ -373,7 +377,7 @@ int socket_receive_timeout(int fd, void *data, size_t length, int flags,
 		return res;
 	}
 	// if we get here, there _is_ data available
-	result = recv(fd, data, length, flags);
+	result = recv(fd, (char *)data, length, flags);
 	if (res > 0 && result == 0) {
 		// but this is an error condition
 		if (verbose >= 3)
@@ -388,5 +392,5 @@ int socket_receive_timeout(int fd, void *data, size_t length, int flags,
 
 int socket_send(int fd, void *data, size_t length)
 {
-	return send(fd, data, length, 0);
+	return send(fd, (const char *)data, length, 0);
 }

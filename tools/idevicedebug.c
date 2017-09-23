@@ -28,8 +28,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#ifndef _MSC_VER
 #include <unistd.h>
 #include <libgen.h>
+#endif
 
 #ifdef WIN32
 #include <windows.h>
@@ -249,9 +251,9 @@ int main(int argc, char *argv[])
 			}
 			/* add environment variable */
 			if (!newlist)
-				newlist = malloc((environment_count + 1) * sizeof(char*));
+				newlist = (char **)malloc((environment_count + 1) * sizeof(char*));
 			else
-				newlist = realloc(environment, (environment_count + 1) * sizeof(char*));
+				newlist = (char **)realloc(environment, (environment_count + 1) * sizeof(char*));
 			newlist[environment_count++] = strdup(argv[i]);
 			environment = newlist;
 			continue;
@@ -281,7 +283,7 @@ int main(int argc, char *argv[])
 	}
 
 	if (environment) {
-		newlist = realloc(environment, (environment_count + 1) * sizeof(char*));
+		newlist = (char **)realloc(environment, (environment_count + 1) * sizeof(char*));
 		newlist[environment_count] = NULL;
 		environment = newlist;
 	}

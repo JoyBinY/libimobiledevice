@@ -142,11 +142,11 @@ int main(int argc, char *argv[])
 			}
 
 			count = 0;
-			nspec = malloc(sizeof(char*) * (count+1));
+			nspec = (char **)malloc(sizeof(char*) * (count+1));
 
 			while(1) {
 				if (argv[i] && (strlen(argv[i]) >= 2) && (strncmp(argv[i], "-", 1) != 0)) {
-					nspectmp = realloc(nspec, sizeof(char*) * (count+1));
+					nspectmp = (char **)realloc(nspec, sizeof(char*) * (count+1));
 					nspectmp[count] = strdup(argv[i]);
 					nspec = nspectmp;
 					count = count+1;
@@ -157,7 +157,7 @@ int main(int argc, char *argv[])
 				}
 			}
 
-			nspectmp = realloc(nspec, sizeof(char*) * (count+1));
+			nspectmp = (char **)realloc(nspec, sizeof(char*) * (count+1));
 			nspectmp[count] = NULL;
 			nspec = nspectmp;
 			continue;

@@ -73,7 +73,7 @@ LIBIMOBILEDEVICE_API mobileactivation_error_t mobileactivation_client_new(idevic
 LIBIMOBILEDEVICE_API mobileactivation_error_t mobileactivation_client_start_service(idevice_t device, mobileactivation_client_t * client, const char* label)
 {
 	mobileactivation_error_t err = MOBILEACTIVATION_E_UNKNOWN_ERROR;
-	service_client_factory_start_service(device, MOBILEACTIVATION_SERVICE_NAME, (void**)client, label, SERVICE_CONSTRUCTOR(mobileactivation_client_new), &err);
+	service_client_factory_start_service(device, MOBILEACTIVATION_SERVICE_NAME, (void**)client, label, SERVICE_CONSTRUCTOR(mobileactivation_client_new), (int32_t *)&err);
 	return err;
 }
 

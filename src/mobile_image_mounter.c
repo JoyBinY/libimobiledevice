@@ -21,7 +21,9 @@
 
 #include <string.h>
 #include <stdlib.h>
+#ifndef _MSC_VER
 #include <unistd.h>
+#endif
 #include <plist/plist.h>
 
 #include "mobile_image_mounter.h"
@@ -95,7 +97,7 @@ LIBIMOBILEDEVICE_API mobile_image_mounter_error_t mobile_image_mounter_new(idevi
 LIBIMOBILEDEVICE_API mobile_image_mounter_error_t mobile_image_mounter_start_service(idevice_t device, mobile_image_mounter_client_t * client, const char* label)
 {
 	mobile_image_mounter_error_t err = MOBILE_IMAGE_MOUNTER_E_UNKNOWN_ERROR;
-	service_client_factory_start_service(device, MOBILE_IMAGE_MOUNTER_SERVICE_NAME, (void**)client, label, SERVICE_CONSTRUCTOR(mobile_image_mounter_new), &err);
+	service_client_factory_start_service(device, MOBILE_IMAGE_MOUNTER_SERVICE_NAME, (void**)client, label, SERVICE_CONSTRUCTOR(mobile_image_mounter_new), (int32_t *)&err);
 	return err;
 }
 
@@ -199,7 +201,7 @@ LIBIMOBILEDEVICE_API mobile_image_mounter_error_t mobile_image_mounter_upload_im
 	while (tx < image_size) {
 		size_t remaining = image_size - tx;
 		size_t amount = (remaining < bufsize) ? remaining : bufsize;
-		ssize_t r = upload_cb(buf, amount, userdata);
+		size_t r = upload_cb(buf, amount, userdata);
 		if (r < 0) {
 			debug_info("upload_cb returned %d", (int)r);
 			break;

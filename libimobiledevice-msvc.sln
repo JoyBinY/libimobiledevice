@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libimobiledevice", "libimobiledevice\libimobiledevice.vcxproj", "{F6B0504E-B6AA-46DA-A9DB-88F7F0A33FF2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{59C64127-CD74-43BD-A230-73D9B6A0BB58} = {59C64127-CD74-43BD-A230-73D9B6A0BB58}
+		{F208BCE9-F926-49B4-9BD7-21A2508EACC8} = {F208BCE9-F926-49B4-9BD7-21A2508EACC8}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libplist", "libplist\libplist.vcxproj", "{F208BCE9-F926-49B4-9BD7-21A2508EACC8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0E0BE2CB-14E7-4DE9-A05D-355CB2ABF513} = {0E0BE2CB-14E7-4DE9-A05D-355CB2ABF513}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libusbmuxd", "libusbmuxd\libusbmuxd.vcxproj", "{59C64127-CD74-43BD-A230-73D9B6A0BB58}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F208BCE9-F926-49B4-9BD7-21A2508EACC8} = {F208BCE9-F926-49B4-9BD7-21A2508EACC8}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "support", "support", "{292BA4AE-0E45-42FA-A4E5-7123EF689CA1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcnary", "libplist\libcnary\libcnary.vcxproj", "{0E0BE2CB-14E7-4DE9-A05D-355CB2ABF513}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F6B0504E-B6AA-46DA-A9DB-88F7F0A33FF2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F6B0504E-B6AA-46DA-A9DB-88F7F0A33FF2}.Debug|Win32.Build.0 = Debug|Win32
+		{F6B0504E-B6AA-46DA-A9DB-88F7F0A33FF2}.Release|Win32.ActiveCfg = Release|Win32
+		{F6B0504E-B6AA-46DA-A9DB-88F7F0A33FF2}.Release|Win32.Build.0 = Release|Win32
+		{F208BCE9-F926-49B4-9BD7-21A2508EACC8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F208BCE9-F926-49B4-9BD7-21A2508EACC8}.Debug|Win32.Build.0 = Debug|Win32
+		{F208BCE9-F926-49B4-9BD7-21A2508EACC8}.Release|Win32.ActiveCfg = Release|Win32
+		{F208BCE9-F926-49B4-9BD7-21A2508EACC8}.Release|Win32.Build.0 = Release|Win32
+		{59C64127-CD74-43BD-A230-73D9B6A0BB58}.Debug|Win32.ActiveCfg = Debug|Win32
+		{59C64127-CD74-43BD-A230-73D9B6A0BB58}.Debug|Win32.Build.0 = Debug|Win32
+		{59C64127-CD74-43BD-A230-73D9B6A0BB58}.Release|Win32.ActiveCfg = Release|Win32
+		{59C64127-CD74-43BD-A230-73D9B6A0BB58}.Release|Win32.Build.0 = Release|Win32
+		{0E0BE2CB-14E7-4DE9-A05D-355CB2ABF513}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0E0BE2CB-14E7-4DE9-A05D-355CB2ABF513}.Debug|Win32.Build.0 = Debug|Win32
+		{0E0BE2CB-14E7-4DE9-A05D-355CB2ABF513}.Release|Win32.ActiveCfg = Release|Win32
+		{0E0BE2CB-14E7-4DE9-A05D-355CB2ABF513}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0E0BE2CB-14E7-4DE9-A05D-355CB2ABF513} = {292BA4AE-0E45-42FA-A4E5-7123EF689CA1}
+	EndGlobalSection
+EndGlobal

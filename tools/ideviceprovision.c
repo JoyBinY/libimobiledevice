@@ -36,6 +36,10 @@
 #include <arpa/inet.h>
 #endif
 
+#ifdef _MSC_VER
+#include <dirent.h>
+#endif
+
 #include <libimobiledevice/libimobiledevice.h>
 #include <libimobiledevice/lockdown.h>
 #include <libimobiledevice/misagent.h>
@@ -247,7 +251,7 @@ static int profile_read_from_file(const char* path, unsigned char **profile_data
 		return -1;
 	}
 
-	unsigned char* buf = malloc(size);
+	unsigned char* buf = (unsigned char *)malloc(size);
 	if (!buf) {
 		fprintf(stderr, "Could not allocate memory...\n");
 		fclose(f);
@@ -256,7 +260,7 @@ static int profile_read_from_file(const char* path, unsigned char **profile_data
 
 	long int cur = 0;
 	while (cur < size) {
-		ssize_t r = fread(buf+cur, 1, 512, f);
+		size_t r = fread(buf+cur, 1, 512, f);
 		if (r <= 0) {
 			break;
 		}

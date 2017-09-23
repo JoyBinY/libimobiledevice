@@ -21,7 +21,9 @@
 
 #include <string.h>
 #include <stdlib.h>
+#ifndef _MSC_VER
 #include <unistd.h>
+#endif
 #include <plist/plist.h>
 
 #include "house_arrest.h"
@@ -74,7 +76,7 @@ LIBIMOBILEDEVICE_API house_arrest_error_t house_arrest_client_new(idevice_t devi
 LIBIMOBILEDEVICE_API house_arrest_error_t house_arrest_client_start_service(idevice_t device, house_arrest_client_t * client, const char* label)
 {
 	house_arrest_error_t err = HOUSE_ARREST_E_UNKNOWN_ERROR;
-	service_client_factory_start_service(device, HOUSE_ARREST_SERVICE_NAME, (void**)client, label, SERVICE_CONSTRUCTOR(house_arrest_client_new), &err);
+	service_client_factory_start_service(device, HOUSE_ARREST_SERVICE_NAME, (void**)client, label, SERVICE_CONSTRUCTOR(house_arrest_client_new), (int32_t *)&err);
 	return err;
 }
 

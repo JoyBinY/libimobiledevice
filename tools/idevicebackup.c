@@ -34,7 +34,11 @@
 #else
 #include <gcrypt.h>
 #endif
+#ifndef _MSC_VER
 #include <unistd.h>
+#else
+#define snprintf _snprintf
+#endif
 #include <ctype.h>
 #include <time.h>
 
@@ -54,6 +58,10 @@
 #ifdef WIN32
 #include <windows.h>
 #define sleep(x) Sleep(x*1000)
+#endif
+
+#ifdef _MSC_VER
+#define usleep(x) Sleep(x/1000)
 #endif
 
 static mobilebackup_client_t mobilebackup = NULL;
@@ -533,7 +541,7 @@ static int mobilebackup_check_file_integrity(const char *backup_directory, const
 		plist_get_string_val(node, &domain);
 	}
 
-	char *fnstr = malloc(strlen(domain) + 1 + strlen(destpath) + 1);
+	char *fnstr = (char *)malloc(strlen(domain) + 1 + strlen(destpath) + 1);
 	strcpy(fnstr, domain);
 	strcat(fnstr, "-");
 	strcat(fnstr, destpath);

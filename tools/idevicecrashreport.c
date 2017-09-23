@@ -27,7 +27,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#ifdef _MSC_VER
+#include <dirent.h>
+#include <sys/types.h >
+#define atoll _atoi64
+#define mkdir(x) CreateDirectory((x), NULL)
+#else
 #include <unistd.h>
+#endif
 #include "common/utils.h"
 
 #include <libimobiledevice/afc.h>
@@ -405,7 +412,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	/* read "ping" message which indicates the crash logs have been moved to a safe harbor */
-	char *ping = malloc(4);
+	char *ping = (char *)malloc(4);
 	memset(ping, '\0', 4);
 	int attempts = 0;
 	while ((strncmp(ping, "ping", 4) != 0) && (attempts < 10)) {

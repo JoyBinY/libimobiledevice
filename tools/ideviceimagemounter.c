@@ -29,11 +29,13 @@
 #include <stdio.h>
 #include <string.h>
 #include <getopt.h>
-#include <errno.h>
+#ifndef _MSC_VER
 #include <libgen.h>
-#include <time.h>
 #include <sys/time.h>
 #include <inttypes.h>
+#endif
+#include <errno.h>
+#include <time.h>
 
 #include <libimobiledevice/libimobiledevice.h>
 #include <libimobiledevice/lockdown.h>
@@ -134,7 +136,7 @@ static void print_xml(plist_t node)
 		puts(xml);
 }
 
-static ssize_t mim_upload_cb(void* buf, size_t size, void* userdata)
+static size_t mim_upload_cb(void* buf, size_t size, void* userdata)
 {
 	return fread(buf, 1, size, (FILE*)userdata);
 }

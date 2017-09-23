@@ -34,7 +34,6 @@
 #ifndef WIN32
 #include <pwd.h>
 #endif
-#include <unistd.h>
 #include <usbmuxd.h>
 #ifdef HAVE_OPENSSL
 #include <openssl/pem.h>
@@ -49,8 +48,11 @@
 #include <libtasn1.h>
 #endif
 
-#include <dirent.h>
+#ifndef _MSC_VER
+#include <unistd.h>
 #include <libgen.h>
+#endif
+#include <dirent.h>
 #include <sys/stat.h>
 #include <errno.h>
 
@@ -245,7 +247,7 @@ userpref_error_t userpref_get_paired_udids(char ***list, unsigned int *count)
 					udids = listp;
 				} else {
 					listp->next = ne;
-					listp = listp->next;
+					listp = (slist_t *)listp->next;
 				}
 				found++;
 			}
@@ -257,7 +259,7 @@ userpref_error_t userpref_get_paired_udids(char ***list, unsigned int *count)
 	while (udids) {
 		(*list)[i++] = udids->name;
 		struct slist_t *old = udids;
-		udids = udids->next;
+		udids = (slist_t *)udids->next;
 		free(old);
 	}
 	(*list)[i] = NULL;

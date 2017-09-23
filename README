@@ -7,6 +7,7 @@ protocols.
 Requirements
 ============
 
+----gcc-----
 Development Packages of:
 	OpenSSL or GnuTLS
 	libplist
@@ -25,10 +26,21 @@ Software:
 Optional:
 	cython (Python bindings)
 	doxygen (Documentation)
+	
+[OR]
+
+----msvc----
+Development Packages of:
+	libusbmuxd[https://github.com/JoyBinY/libusbmuxd]
+	libplist[https://github.com/JoyBinY/libplist]
+
+Software:
+	Visual Studio 2010
 
 Installation
 ============
 
+----gcc-----
 To compile run:
 	./autogen.sh
 	make
@@ -43,6 +55,18 @@ you can pass them directly to ./autogen.sh like this:
 By default, OpenSSL will be used. If you prefer GnuTLS, configure with
  --disable-openssl like this:
 	./autogen.sh --disable-openssl
+	
+[OR]
+
+----msvc----
+To compile:
+	1）move "libimobiledevice-msvc.sln" to the parent directory
+	2）run "../libimobiledevice-msvc.sln"
+
+	--libimobiledevice-msvc.sln
+	|-libimobiledevice
+	|-libusbmuxd[https://github.com/JoyBinY/libusbmuxd]
+	|-libplist[https://github.com/JoyBinY/libplist]
 
 Who/What/Where?
 ===============
@@ -76,4 +100,4 @@ libimobiledevice is an independent software library and has not been
 authorized, sponsored, or otherwise approved by Apple Inc.
 
 README Updated on:
-	2017-04-28
+	2017-09-22
